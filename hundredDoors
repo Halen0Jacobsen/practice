@@ -1,0 +1,62 @@
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    DoorView view = new DoorView(100);
+
+    // toggle through all doors
+    view.toggleDoors(1);
+
+    // toggle through every other door
+    view.toggleDoors(2);
+
+    // toggle through every 3rd door
+    view.toggleDoors(3);
+
+
+    // Create list of open doors after all 3 iterations and printing out open doors
+    ArrayList<Integer> openDoors = view.getOpenDoors();
+    System.out.println("The doors open are:");
+    for (int doorNum : openDoors) {
+      System.out.println("Door: " + doorNum);
+    }
+  }
+}
+
+#DoorView.java
+import java.util.ArrayList;
+
+// First array list will represent whether doors are open or closed 
+public class DoorView {
+  private ArrayList<Boolean> doors;
+
+  // The constructor initilizes the method with number of doors
+  public DoorView( int numOfDoors) {
+    doors = new ArrayList<>(numOfDoors);
+    for (int i = 0; i < numOfDoors; i++) {
+      doors.add(false);                      // setting all doors to false or closed
+    }
+  }
+
+  
+  // this method will toggle number of doors based on the number being passed in
+  public void toggleDoors(int n) {
+    for (int i = n - 1; i < doors.size(); i += n) {
+      doors.set(i, !doors.get(i));
+    }
+  }
+
+  // This method will get the list of open doors
+  public ArrayList<Integer> getOpenDoors() {
+    ArrayList<Integer> openDoors = new ArrayList<>();
+    for (int i = 0; i < doors.size(); i++) {
+      if (doors.get(i)) {                   // checking for open doors
+        openDoors.add(i + 1);               // add 1 to i to compensate for indexing
+      }
+    }
+
+    return openDoors;
+  }
+}
+
+# other 
